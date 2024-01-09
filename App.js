@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Intro from './app/screens/intro';
 import { useEffect } from 'react';
+import colors from './app/misc/colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function App() {
   const findUser = async () => {
     const result = await AsyncStorage.getItem('user');
+    console.log(result);
   };
 
   useEffect(() => {
@@ -17,7 +21,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.BACKGROUND,
     alignItems: 'center',
     justifyContent: 'center',
   },
