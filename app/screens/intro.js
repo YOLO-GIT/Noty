@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text, TextInput, Dimensions } from "react-native";
 import colors from "../misc/colors";
 import RoundIconbtn from "../components/roundIconbtn";
-import fonts from "../misc/font";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Intro = () => {
