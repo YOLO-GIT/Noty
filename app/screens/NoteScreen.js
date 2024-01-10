@@ -4,9 +4,10 @@ import colors from "../misc/colors";
 import SearchBar from "../components/searchBar";
 import RoundIconbtn from "../components/roundIconbtn";
 import { LinearGradient } from "expo-linear-gradient";
-
+import NoteInput from "../components/NoteInput";
 const NoteScreen = ({ user }) => {
   const [greet, setGreet] = useState("Evening");
+  const [modalVisible, setModalVisible] = useState(false);
   const findGreet = () => {
     const hours = new Date().getHours();
     if (hours === 0 || hours < 12) return setGreet("Morning");
@@ -18,24 +19,37 @@ const NoteScreen = ({ user }) => {
     findGreet();
   }, []);
 
+  // Call the Value on the OnSUbmit in the NoteInput
+  const handleOnSubmit = (title, desc) => {};
+
   return (
     <>
-      <LinearGradient colors={["#4CA1AF", "#C4E0E5"]} style={styles.container}>
+      <LinearGradient colors={colors.CUSTOM_TWO} style={styles.container}>
         <StatusBar barStyle="dark-content" backgroundColor={colors.LIGHT} />
         <View>
           <Text style={styles.headerText}>
             {`Good ${greet} `}
             <Text style={styles.customGreet}>{`${user.name}`}</Text>
           </Text>
-          <SearchBar containerStyle={{ marginVertical: 1 }} />
         </View>
+        <SearchBar containerStyle={{ marginVertical: 1 }} />
         <View
           style={[StyleSheet.absoluteFillObject, styles.emptyHeadingContainer]}
         >
-          <Text style={styles.emptyHeading}> Add Notes </Text>{" "}
-          <RoundIconbtn antIconName="plus" style={styles.StyleBtn} />{" "}
+          <Text style={styles.emptyHeading}> Add Notes </Text>
+          <RoundIconbtn
+            onPress={() => setModalVisible(true)}
+            antIconName="plus"
+            style={styles.StyleBtn}
+          />
         </View>
       </LinearGradient>
+      {/* To Add New Notes */}
+      <NoteInput
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onsubmit={handleOnSubmit}
+      />
     </>
   );
 };
@@ -52,7 +66,7 @@ const styles = StyleSheet.create({
     marginTop: 6,
     marginBottom: 6,
   },
-  customGreet:{
+  customGreet: {
     fontSize: 25,
     fontWeight: "bold",
     fontStyle: "italic",

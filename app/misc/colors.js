@@ -6,4 +6,6 @@ export default {
     BACKGROUND: '#fff8dc',
     USER: '#F09819',
     PLACEHOLDER: '#375176',
+    CUSTOM_ONE: ['#000428', '#004e92'],
+    CUSTOM_TWO: ["#4CA1AF", "#C4E0E5"],
 };
