@@ -53,7 +53,7 @@ const NoteInput = ({ visible, onClose, onsubmit }) => {
             <TextInput
               value={title}
               onChangeText={(text) => handleOnChangeText(text, "title")}
-              placeholder="Title E.G: YOLO IS NUMBER ONE"
+              placeholder="Title"
               style={[styles.input, styles.title]}
             />
             <TextInput
@@ -66,14 +66,14 @@ const NoteInput = ({ visible, onClose, onsubmit }) => {
             <View style={styles.CustomSubmit}>
               <RoundIconbtn
                 antIconName="check"
-                size={15}
+                // size={15}
                 style={styles.customCheck}
                 onPress={handleSubmit}
               />
               {title.trim() || desc.trim() ? (
                 <RoundIconbtn
                   antIconName="close"
-                  size={15}
+                  // size={15}
                   style={styles.customCancel}
                   onPress={closeModal}
                 />
@@ -94,10 +94,13 @@ const styles = StyleSheet.create({
   input: {
     borderBottomWidth: 2,
     borderBottomColor: colors.PRIMARY,
+    paddingLeft: 15,
   },
   input_two: {
     borderWidth: 2,
-    borderBottomColor: colors.PRIMARY,
+    borderColor: colors.PRIMARY,
+    backgroundColor: "#fff6cf",
+    paddingLeft: 15,
   },
   container: {
     paddingHorizontal: 20,
@@ -106,6 +109,7 @@ const styles = StyleSheet.create({
   title: {
     height: 40,
     marginBottom: 15,
+    fontSize: 25,
     fontWeight: "bold",
     placeholderTextColor: colors.PLACEHOLDER,
   },
@@ -113,6 +117,7 @@ const styles = StyleSheet.create({
     height: 100,
     fontStyle: "italic",
     placeholderTextColor: colors.PLACEHOLDER,
+    fontSize: 15,
   },
   modalBg: {
     flex: 1,

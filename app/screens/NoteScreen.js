@@ -7,16 +7,32 @@ import { LinearGradient } from "expo-linear-gradient";
 import NoteInput from "../components/NoteInput";
 const NoteScreen = ({ user }) => {
   const [greet, setGreet] = useState("Evening");
+  const [time_color, setColor] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const findGreet = () => {
     const hours = new Date().getHours();
-    if (hours === 0 || hours < 12) return setGreet("Morning");
-    if (hours === 1 || hours < 17) return setGreet("Afternoon");
-    setGreet("Evening");
+    if (hours === 0 || hours < 12) return setGreet("Morning:");
+    if (hours === 1 || hours < 17) return setGreet("Afternoon:");
+    setGreet("Evening:");
+  };
+
+  const findTime = () => {
+    const hours = new Date().getHours();
+    if (hours >= 0 && hours < 12) {
+      setColor("#ffcd80"); // Morning
+    } else if (hours >= 12 && hours < 17) {
+      setColor("#fff8b6"); // Afternoon
+    } else {
+      setColor("#131862"); // Evening/Night
+    }
   };
 
   useEffect(() => {
     findGreet();
+  }, []);
+
+  useEffect(() => {
+    findTime();
   }, []);
 
   // Call the Value on the OnSUbmit in the NoteInput
@@ -27,8 +43,8 @@ const NoteScreen = ({ user }) => {
       <LinearGradient colors={colors.CUSTOM_TWO} style={styles.container}>
         <StatusBar barStyle="dark-content" backgroundColor={colors.LIGHT} />
         <View>
-          <Text style={styles.headerText}>
-            {`Good ${greet} `}
+          <Text style={[styles.headerText, { color: `${time_color}` }]}>
+            {`Good ${greet}  `}
             <Text style={styles.customGreet}>{`${user.name}`}</Text>
           </Text>
         </View>
@@ -63,7 +79,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop: 6,
+    marginTop:20,
     marginBottom: 6,
   },
   customGreet: {
