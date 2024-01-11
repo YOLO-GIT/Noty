@@ -42,22 +42,27 @@ const NoteScreen = ({ user }) => {
     <>
       <LinearGradient colors={colors.CUSTOM_TWO} style={styles.container}>
         <StatusBar barStyle="dark-content" backgroundColor={colors.LIGHT} />
-        <View>
+        <View style={styles.customBar}>
           <Text style={[styles.headerText, { color: `${time_color}` }]}>
             {`Good ${greet}  `}
             <Text style={styles.customGreet}>{`${user.name}`}</Text>
           </Text>
         </View>
-        <SearchBar containerStyle={{ marginVertical: 1 }} />
-        <View
-          style={[StyleSheet.absoluteFillObject, styles.emptyHeadingContainer]}
-        >
-          <Text style={styles.emptyHeading}> Add Notes </Text>
-          <RoundIconbtn
-            onPress={() => setModalVisible(true)}
-            antIconName="plus"
-            style={styles.StyleBtn}
-          />
+        <View style={styles.container_two}>
+          <SearchBar containerStyle={{ marginVertical: 1 }} />
+          <View
+            style={[
+              StyleSheet.absoluteFillObject,
+              styles.emptyHeadingContainer,
+            ]}
+          >
+            <Text style={styles.emptyHeading}> Add Notes </Text>
+            <RoundIconbtn
+              onPress={() => setModalVisible(true)}
+              antIconName="plus"
+              style={styles.StyleBtn}
+            />
+          </View>
         </View>
       </LinearGradient>
       {/* To Add New Notes */}
@@ -73,13 +78,19 @@ const NoteScreen = ({ user }) => {
 // To Store CSS
 const styles = StyleSheet.create({
   container: {
+    // paddingHorizontal: 20,
+    flex: 1,
+  },
+  container_two: {
     paddingHorizontal: 20,
     flex: 1,
   },
   headerText: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop:20,
+    paddingHorizontal: 20,
+    // marginTop: 20,
+
     marginBottom: 6,
   },
   customGreet: {
@@ -107,6 +118,9 @@ const styles = StyleSheet.create({
   },
   gradientCustom: {
     colors: ["#4c669f", "#3b5998", "#192f6a"],
+  },
+  customBar: {
+    backgroundColor: colors.DARK,
   },
 });
 

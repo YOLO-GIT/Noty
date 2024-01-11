@@ -92,9 +92,10 @@ const NoteInput = ({ visible, onClose, onsubmit }) => {
 
 const styles = StyleSheet.create({
   input: {
-    borderBottomWidth: 2,
-    borderBottomColor: colors.PRIMARY,
+    borderWidth: 2,
+    borderColor: colors.PRIMARY,
     paddingLeft: 15,
+    backgroundColor: "#fff6cf",
   },
   input_two: {
     borderWidth: 2,
