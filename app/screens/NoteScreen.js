@@ -5,22 +5,32 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  FlatList,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../misc/colors";
 import SearchBar from "../components/searchBar";
 import RoundIconbtn from "../components/roundIconbtn";
 import { LinearGradient } from "expo-linear-gradient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import NoteInput from "../components/NoteInput";
+import SaveNote from "../components/SaveNote";
+
 const NoteScreen = ({ user }) => {
   const [greet, setGreet] = useState("Evening");
   const [time_color, setColor] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [notes, setNotes] = useState([]);
   const findGreet = () => {
     const hours = new Date().getHours();
     if (hours === 0 || hours < 12) return setGreet("Morning:");
     if (hours === 1 || hours < 17) return setGreet("Afternoon:");
     setGreet("Evening:");
+  };
+
+  const findNotes = async () => {
+    const result = await AsyncStorage.getItem("notes");
+    if (result !== null) setNotes(JSON.parse(result));
   };
 
   const findTime = () => {
@@ -36,14 +46,18 @@ const NoteScreen = ({ user }) => {
 
   useEffect(() => {
     findGreet();
-  }, []);
-
-  useEffect(() => {
+    findNotes();
     findTime();
   }, []);
 
   // Call the Value on the OnSubmit in the NoteInput
-  const handleOnSubmit = (title, desc) => {};
+  const handleOnSubmit = async (title, desc) => {
+    // Render note and render it in the AsyncStorage
+    const addNote = { id: Date.now(), title, desc, checkTime: Date.now() };
+    const updateNote = [...notes, addNote];
+    setNotes(updateNote);
+    await AsyncStorage.setItem("notes", JSON.stringify(updateNote));
+  };
 
   return (
     <>
@@ -57,23 +71,38 @@ const NoteScreen = ({ user }) => {
             </Text>
           </View>
           <View style={styles.container_two}>
-            <SearchBar containerStyle={{ marginVertical: 1 }} />
-            <View
-              style={[
-                StyleSheet.absoluteFillObject,
-                styles.emptyHeadingContainer,
-              ]}
-            >
-              <Text style={styles.emptyHeading}> Add Notes </Text>
-            </View>
-            <RoundIconbtn
-              onPress={() => setModalVisible(true)}
-              antIconName="plus"
-              style={styles.StyleBtn}
+            {notes.length ? (
+              <SearchBar containerStyle={{ marginVertical: 1 }} />
+            ) : null}
+            <FlatList
+              data={notes}
+              numColumns={2}
+              columnWrapperStyle={{
+                justifyContent: "space-between",
+                marginBottom: 5,
+                marginTop: 10,
+              }}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => <SaveNote item={item} />}
             />
+            {!notes.length ? (
+              <View
+                style={[
+                  StyleSheet.absoluteFillObject,
+                  styles.emptyHeadingContainer,
+                ]}
+              >
+                <Text style={styles.emptyHeading}> Add Notes </Text>
+              </View>
+            ) : null}
           </View>
         </LinearGradient>
       </TouchableWithoutFeedback>
+      <RoundIconbtn
+        onPress={() => setModalVisible(true)}
+        antIconName="plus"
+        style={styles.StyleBtn}
+      />
       {/* To Add New Notes */}
       <NoteInput
         visible={modalVisible}

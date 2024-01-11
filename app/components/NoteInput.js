@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
   },
   desc: {
     height: 100,
-    fontStyle: "italic",
     placeholderTextColor: colors.PLACEHOLDER,
     fontSize: 15,
   },
