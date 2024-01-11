@@ -1,4 +1,11 @@
-import { View, Text, StatusBar, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StatusBar,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../misc/colors";
 import SearchBar from "../components/searchBar";
@@ -35,36 +42,38 @@ const NoteScreen = ({ user }) => {
     findTime();
   }, []);
 
-  // Call the Value on the OnSUbmit in the NoteInput
+  // Call the Value on the OnSubmit in the NoteInput
   const handleOnSubmit = (title, desc) => {};
 
   return (
     <>
-      <LinearGradient colors={colors.CUSTOM_TWO} style={styles.container}>
-        <StatusBar barStyle="dark-content" backgroundColor={colors.LIGHT} />
-        <View style={styles.customBar}>
-          <Text style={[styles.headerText, { color: `${time_color}` }]}>
-            {`Good ${greet}  `}
-            <Text style={styles.customGreet}>{`${user.name}`}</Text>
-          </Text>
-        </View>
-        <View style={styles.container_two}>
-          <SearchBar containerStyle={{ marginVertical: 1 }} />
-          <View
-            style={[
-              StyleSheet.absoluteFillObject,
-              styles.emptyHeadingContainer,
-            ]}
-          >
-            <Text style={styles.emptyHeading}> Add Notes </Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <LinearGradient colors={colors.CUSTOM_TWO} style={styles.container}>
+          <StatusBar barStyle="dark-content" backgroundColor={colors.LIGHT} />
+          <View style={styles.customBar}>
+            <Text style={[styles.headerText, { color: `${time_color}` }]}>
+              {`Good ${greet}  `}
+              <Text style={styles.customGreet}>{`${user.name}`}</Text>
+            </Text>
+          </View>
+          <View style={styles.container_two}>
+            <SearchBar containerStyle={{ marginVertical: 1 }} />
+            <View
+              style={[
+                StyleSheet.absoluteFillObject,
+                styles.emptyHeadingContainer,
+              ]}
+            >
+              <Text style={styles.emptyHeading}> Add Notes </Text>
+            </View>
             <RoundIconbtn
               onPress={() => setModalVisible(true)}
               antIconName="plus"
               style={styles.StyleBtn}
             />
           </View>
-        </View>
-      </LinearGradient>
+        </LinearGradient>
+      </TouchableWithoutFeedback>
       {/* To Add New Notes */}
       <NoteInput
         visible={modalVisible}
@@ -90,7 +99,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingHorizontal: 20,
     // marginTop: 20,
-
     marginBottom: 6,
   },
   customGreet: {
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
   StyleBtn: {
     position: "absolute",
     right: 15,
-    bottom: 50,
+    bottom: 20,
   },
   gradientCustom: {
     colors: ["#4c669f", "#3b5998", "#192f6a"],
