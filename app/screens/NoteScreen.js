@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 15,
     bottom: 20,
+    zIndex: 1,
   },
   gradientCustom: {
     colors: ["#4c669f", "#3b5998", "#192f6a"],
