@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
+  Appearance,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import colors from "../misc/colors";
@@ -23,6 +24,7 @@ const NoteScreen = ({ user, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const {notes, setNotes} = useNoty()
   
+  // Find User
   const findGreet = () => {
     const hours = new Date().getHours();
     if (hours === 0 || hours < 12) return setGreet("Morning:");
@@ -30,14 +32,15 @@ const NoteScreen = ({ user, navigation }) => {
     setGreet("Evening:");
   };
 
+  // Find time to set the text color
   const findTime = () => {
     const hours = new Date().getHours();
     if (hours >= 0 && hours < 12) {
-      setColor("#ffcd80"); // Morning
+      setColor(colors.MORNING); // Morning
     } else if (hours >= 12 && hours < 17) {
-      setColor("#fff8b6"); // Afternoon
+      setColor(colors.AFTERNOON); // Afternoon
     } else {
-      setColor("#131862"); // Evening/Night
+      setColor(colors.EVENING); // Evening/Night
     }
   };
 
@@ -63,10 +66,10 @@ const NoteScreen = ({ user, navigation }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <LinearGradient colors={colors.CUSTOM_TWO} style={styles.container}>
           <StatusBar barStyle="dark-content" backgroundColor={colors.LIGHT} />
-          <View style={styles.customBar}>
+          <View className="bg-slate-900 dark:bg-black z-1" >
             <Text style={[styles.headerText, { color: `${time_color}` }]}>
               {`Good ${greet}  `}
-              <Text style={styles.customGreet}>{`${user.name}`}</Text>
+              <Text className="text-2xl font-bold italic text-amber-400 underline">{`${user.name}`}</Text>
             </Text>
           </View>
           <View style={styles.container_two}>
@@ -128,14 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     paddingHorizontal: 20,
-    // marginTop: 20,
     marginBottom: 6,
-  },
-  customGreet: {
-    fontSize: 25,
-    fontWeight: "bold",
-    fontStyle: "italic",
-    color: colors.USER,
   },
   emptyHeading: {
     fontSize: 25,
@@ -158,9 +154,6 @@ const styles = StyleSheet.create({
   },
   gradientCustom: {
     colors: ["#4c669f", "#3b5998", "#192f6a"],
-  },
-  customBar: {
-    backgroundColor: colors.DARK,
   },
 });
 

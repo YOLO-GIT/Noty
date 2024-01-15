@@ -65,14 +65,16 @@ const NoteDetail = (props) => {
             { paddingTop: headerHeight },
           ]}
         >
-          <Text style={styles.styleTime}>{`Viewing now at ${formatDate(
+          <Text className="text-red-100 text-center font-bold italic">{`Viewing now at ${formatDate(
             note.time
           )}`}</Text>
-          <Text style={styles.title}>{note.title}</Text>
-          <Text style={styles.desc}>{note.desc}</Text>
+          <View className="mt-10 rounded-lg bg-yellow-700 border-6">
+            <Text style={styles.title} className="text-center border-6">{note.title}</Text>
+            <Text style={styles.desc} className="p-4 bg-amber-200">{note.desc}</Text>
+          </View>
         </ScrollView>
       </LinearGradient>
-      <View style={styles.btnContainer}>
+      <View className="absolute bottom-5 right-5">
         <RoundIconbtn
           antIconName="delete"
           style={{ backgroundColor: colors.ERROR, marginBottom: 15 }}
@@ -87,7 +89,6 @@ const NoteDetail = (props) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
-    // flex: 1
   },
   title: {
     fontSize: 30,
@@ -96,7 +97,8 @@ const styles = StyleSheet.create({
   },
   desc: {
     fontSize: 20,
-    opacity: 0.6,
+    opacity: 0.8,
+    color: colors.DARK,
   },
   styleTime: {
     textAlign: "center",
@@ -106,11 +108,6 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     fontWeight: "bold",
-  },
-  btnContainer: {
-    position: "absolute",
-    right: 15,
-    bottom: 15,
   },
 });
 
