@@ -15,22 +15,19 @@ import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NoteInput from "../components/NoteInput";
 import SaveNote from "../components/SaveNote";
+import { useNoty } from "../contexts/NotyProvider";
 
 const NoteScreen = ({ user, navigation }) => {
   const [greet, setGreet] = useState("Evening");
   const [time_color, setColor] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  const [notes, setNotes] = useState([]);
+  const {notes, setNotes} = useNoty()
+  
   const findGreet = () => {
     const hours = new Date().getHours();
     if (hours === 0 || hours < 12) return setGreet("Morning:");
     if (hours === 1 || hours < 17) return setGreet("Afternoon:");
     setGreet("Evening:");
-  };
-
-  const findNotes = async () => {
-    const result = await AsyncStorage.getItem("notes");
-    if (result !== null) setNotes(JSON.parse(result));
   };
 
   const findTime = () => {
@@ -46,7 +43,6 @@ const NoteScreen = ({ user, navigation }) => {
 
   useEffect(() => {
     findGreet();
-    findNotes();
     findTime();
   }, []);
 
@@ -146,12 +142,13 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontWeight: "bold",
     opacity: 0.2,
+    color: colors.DARK,
   },
   emptyHeadingContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    zIndex: -1,
+    zIndex: 1,
   },
   StyleBtn: {
     position: "absolute",
