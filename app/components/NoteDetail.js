@@ -107,7 +107,7 @@ const NoteDetail = (props) => {
             <Text style={styles.title} className="text-center border-6">
               {note.title}
             </Text>
-            <Text style={styles.desc} className="p-4 bg-amber-200">
+            <Text style={styles.desc} className="p-4 bg-amber-200 rounded-b-lg">
               {note.desc}
             </Text>
           </View>

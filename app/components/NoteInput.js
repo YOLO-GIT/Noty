@@ -12,6 +12,11 @@ import { StatusBar } from "expo-status-bar";
 import colors from "../misc/colors";
 import RoundIconbtn from "./roundIconbtn";
 import { LinearGradient } from "expo-linear-gradient";
+import Animated, {
+  useSharedValue,
+  withSpring,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 
 const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
   // To hold the value
@@ -23,12 +28,34 @@ const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
     Keyboard.dismiss();
   };
 
+  const translateY = useSharedValue(500);
+
   useEffect(() => {
     if (isEdit) {
       setTitle(note.title);
       setDesc(note.desc);
     }
   }, [isEdit]);
+
+  // Animation Test
+  useEffect(() => {
+    if (visible) {
+      translateY.value = withSpring(0);
+    } else {
+      translateY.value = withSpring(500);
+    }
+  }, [visible]);
+
+  const modalAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateY: translateY.value,
+        },
+      ],
+    };
+  });
+  // Animation Test End
 
   // To change the value
   const handleOnChangeText = (text, valueFor) => {
@@ -43,7 +70,7 @@ const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
     // Edit Part
     if (isEdit) {
       // For edit
-      onsubmit(title, desc, Date.now())
+      onsubmit(title, desc, Date.now());
     } else {
       onsubmit(title, desc);
       setTitle("");
@@ -65,7 +92,7 @@ const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
       <StatusBar hidden />
       <Modal visible={visible} animationType="fade">
         <LinearGradient colors={colors.CUSTOM_TWO} style={{ flex: 1 }}>
-          <View style={styles.container}>
+          <Animated.View style={[styles.container, modalAnimatedStyle]}>
             <TextInput
               value={title}
               onChangeText={(text) => handleOnChangeText(text, "title")}
@@ -95,7 +122,7 @@ const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
                 />
               ) : null}
             </View>
-          </View>
+          </Animated.View>
           {/* To close the description Line */}
           <TouchableWithoutFeedback onPress={handleModalClose}>
             <View style={[styles.modalBg, StyleSheet.absoluteFillObject]} />
