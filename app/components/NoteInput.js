@@ -7,13 +7,13 @@ import {
   Keyboard,
   TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import colors from "../misc/colors";
 import RoundIconbtn from "./roundIconbtn";
 import { LinearGradient } from "expo-linear-gradient";
 
-const NoteInput = ({ visible, onClose, onsubmit }) => {
+const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
   // To hold the value
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -22,6 +22,13 @@ const NoteInput = ({ visible, onClose, onsubmit }) => {
   const handleModalClose = () => {
     Keyboard.dismiss();
   };
+
+  useEffect(() => {
+    if (isEdit) {
+      setTitle(note.title);
+      setDesc(note.desc);
+    }
+  }, [isEdit]);
 
   // To change the value
   const handleOnChangeText = (text, valueFor) => {
@@ -32,15 +39,24 @@ const NoteInput = ({ visible, onClose, onsubmit }) => {
   // To submit the value
   const handleSubmit = () => {
     if (!title.trim() && !desc.trim()) return onClose();
-    onsubmit(title, desc);
-    setTitle("");
-    setDesc("");
+
+    // Edit Part
+    if (isEdit) {
+      // For edit
+      onsubmit(title, desc, Date.now())
+    } else {
+      onsubmit(title, desc);
+      setTitle("");
+      setDesc("");
+    }
     onClose();
   };
 
   const closeModal = () => {
-    setTitle("");
-    setDesc("");
+    if (!isEdit) {
+      setTitle("");
+      setDesc("");
+    }
     onClose();
   };
 

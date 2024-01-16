@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useHeaderHeight } from "@react-navigation/elements";
 import colors from "../misc/colors";
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import RoundIconbtn from "./roundIconbtn";
 import { useNoty } from "../contexts/NotyProvider";
+import NoteInput from "./NoteInput";
 
 const formatDate = () => {
   const date = new Date();
@@ -20,9 +21,11 @@ const formatDate = () => {
 };
 
 const NoteDetail = (props) => {
-  const { note } = props.route.params;
+  const [note, setNote] = useState(props.route.params.note);
   const headerHeight = useHeaderHeight();
   const { setNotes } = useNoty();
+  const [showModal, setModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const deleteNoty = async () => {
     const result = await AsyncStorage.getItem("notes");
@@ -56,6 +59,36 @@ const NoteDetail = (props) => {
     );
   };
 
+  // Edit Function
+  const handleUpdate = async (title, desc, time) => {
+    const editResult = await AsyncStorage.getItem("notes");
+    if (editResult !== null) notes = JSON.parse(editResult);
+
+    const newEditNotes = notes.filter((n) => {
+      if (n.id === note.id) {
+        n.title = title;
+        n.desc = desc;
+        n.isUpdated = true;
+        n.time = time;
+
+        setNote(n);
+      }
+      return n;
+    });
+
+    setNotes(newEditNotes);
+    await AsyncStorage.setItem("notes", JSON.stringify(newEditNotes));
+  };
+
+  // Function Close
+  const handleClose = () => setModal(false);
+
+  // Function Open Edit
+  const openEditModal = () => {
+    setIsEdit(true);
+    setModal(true);
+  };
+
   return (
     <>
       <LinearGradient colors={colors.CUSTOM_TWO} style={{ flex: 1 }}>
@@ -65,12 +98,18 @@ const NoteDetail = (props) => {
             { paddingTop: headerHeight },
           ]}
         >
-          <Text className="text-red-100 text-center font-bold italic">{`Viewing now at ${formatDate(
-            note.time
-          )}`}</Text>
+          <Text className="text-red-100 text-center font-bold italic">
+            {note.isUpdated
+              ? `Updated At ${formatDate(note.time)}`
+              : `Viewing now at ${formatDate(note.time)}`}
+          </Text>
           <View className="mt-10 rounded-lg bg-yellow-700 border-6">
-            <Text style={styles.title} className="text-center border-6">{note.title}</Text>
-            <Text style={styles.desc} className="p-4 bg-amber-200">{note.desc}</Text>
+            <Text style={styles.title} className="text-center border-6">
+              {note.title}
+            </Text>
+            <Text style={styles.desc} className="p-4 bg-amber-200">
+              {note.desc}
+            </Text>
           </View>
         </ScrollView>
       </LinearGradient>
@@ -80,8 +119,15 @@ const NoteDetail = (props) => {
           style={{ backgroundColor: colors.ERROR, marginBottom: 15 }}
           onPress={displayDeleteAlert}
         />
-        <RoundIconbtn antIconName="edit" />
+        <RoundIconbtn antIconName="edit" onPress={openEditModal} />
       </View>
+      <NoteInput
+        isEdit={isEdit}
+        note={note}
+        onClose={handleClose}
+        onsubmit={handleUpdate}
+        visible={showModal}
+      />
     </>
   );
 };
