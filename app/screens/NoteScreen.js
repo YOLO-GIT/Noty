@@ -17,13 +17,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import NoteInput from "../components/NoteInput";
 import SaveNote from "../components/SaveNote";
 import { useNoty } from "../contexts/NotyProvider";
+import NotyNotFound from "../components/NotyNotFound";
 
 const NoteScreen = ({ user, navigation }) => {
   const [greet, setGreet] = useState("Evening");
   const [time_color, setColor] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-  const {notes, setNotes} = useNoty()
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [resultNotFound, setResultNotFound] = useState(false);
+
+  const { notes, setNotes, findNotes } = useNoty();
+
   // Find User
   const findGreet = () => {
     const hours = new Date().getHours();
@@ -61,12 +65,41 @@ const NoteScreen = ({ user, navigation }) => {
   const openNote = (note) => {
     navigation.navigate("NoteDetail", { note });
   };
+
+  // To handle Search
+  const handleSearch = async (text) => {
+    setSearchQuery(text);
+    if (!text.trim()) {
+      setSearchQuery("");
+      setResultNotFound(false);
+      return await findNotes();
+    }
+
+    const filterNoty = notes.filter((note) => {
+      if (note.title.toLowerCase().includes(text.toLowerCase())) {
+        return note;
+      }
+    });
+
+    if (filterNoty.length) {
+      setNotes([...filterNoty]);
+    } else {
+      setResultNotFound(true);
+    }
+  };
+
+  const handleOnClear = async () => {
+    setSearchQuery("");
+    setResultNotFound(false);
+    await findNotes();
+  };
+
   return (
     <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <LinearGradient colors={colors.CUSTOM_TWO} style={styles.container}>
           <StatusBar barStyle="dark-content" backgroundColor={colors.LIGHT} />
-          <View className="bg-slate-900 dark:bg-black z-1" >
+          <View className="bg-slate-900 dark:bg-black z-1">
             <Text style={[styles.headerText, { color: `${time_color}` }]}>
               {`Good ${greet}  `}
               <Text className="text-2xl font-bold italic text-amber-400 underline">{`${user.name}`}</Text>
@@ -74,21 +107,31 @@ const NoteScreen = ({ user, navigation }) => {
           </View>
           <View style={styles.container_two}>
             {notes.length ? (
-              <SearchBar containerStyle={{ marginVertical: 1 }} />
+              <SearchBar
+                value={searchQuery}
+                onChangeText={handleSearch}
+                containerStyle={{ marginVertical: 1 }}
+                onclear={handleOnClear}
+              />
             ) : null}
-            <FlatList
-              data={notes}
-              numColumns={2}
-              columnWrapperStyle={{
-                justifyContent: "space-between",
-                marginBottom: 5,
-                marginTop: 10,
-              }}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <SaveNote onPress={() => openNote(item)} item={item} />
-              )}
-            />
+
+            {resultNotFound ? (
+              <NotyNotFound />
+            ) : (
+              <FlatList
+                data={notes}
+                numColumns={2}
+                columnWrapperStyle={{
+                  justifyContent: "space-between",
+                  marginBottom: 5,
+                  marginTop: 10,
+                }}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <SaveNote onPress={() => openNote(item)} item={item} />
+                )}
+              />
+            )}
             {!notes.length ? (
               <View
                 style={[
