@@ -7,7 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/Noty.gif",
+      "image": "./assets/Noty_space.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/baseball.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yolo_2.Noty"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8a20ed15-6469-40a2-9207-9d35c354ddd0"
+      }
     }
   }
 }
