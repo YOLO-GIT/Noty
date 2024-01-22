@@ -4,6 +4,8 @@
 - [Features](#features)
 - [Why](#why)
 
+#
+
 # <p align="center"> 📝 Introducing Noty: Your Ultimate Note-Taking Companion! 🚀 </p>
 
 # Introduction
@@ -26,7 +28,7 @@ Unlock the power of seamless note-taking with Noty, the innovative note app desi
 
 - Security First: Trust Noty with your most important ideas. Our app prioritizes security, offering password protection and encryption to keep your notes safe and confidential.
 
-# 🚀 Why Noty?
+# 🚀 Why?
 
 - Noty isn't just a note app; it's a catalyst for turning inspiration into action. Whether you're capturing a sudden burst of creativity, organizing your daily tasks, or collaborating with others, Noty is your go-to solution.
 
