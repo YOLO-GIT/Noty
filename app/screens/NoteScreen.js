@@ -110,11 +110,9 @@ const NoteScreen = ({ user, navigation }) => {
               <SearchBar
                 value={searchQuery}
                 onChangeText={handleSearch}
-                containerStyle={{ marginVertical: 1 }}
                 onclear={handleOnClear}
               />
             ) : null}
-
             {resultNotFound ? (
               <NotyNotFound />
             ) : (

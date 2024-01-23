@@ -100,8 +100,8 @@ const NoteDetail = (props) => {
         >
           <Text className="text-red-100 text-center font-bold italic">
             {note.isUpdated
-              ? `Updated At ${formatDate(note.time)}`
-              : `Viewing now at ${formatDate(note.time)}`}
+              ? `Viewing now at ${formatDate(note.time)}`
+              : `Created at ${formatDate(note.time)}`}
           </Text>
           <View className="mt-10 rounded-lg bg-yellow-700 border-6">
             <Text style={styles.title} className="text-center border-6">
