@@ -2,6 +2,7 @@ export default {
   DARK: "#1e1e1e",
   LIGHT: "#FFF",
   PRIMARY: "#A9F36A",
+  SECONDARY: "#027148",
   ERROR: "#ff0000",
   BACKGROUND: "#fff8dc",
   USER: "#F09819",

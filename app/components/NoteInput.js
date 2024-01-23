@@ -110,7 +110,6 @@ const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
               <RoundIconbtn
                 antIconName="check"
                 // size={15}
-                style={styles.customCheck}
                 onPress={handleSubmit}
               />
               {title.trim() || desc.trim() ? (
@@ -175,7 +174,6 @@ const styles = StyleSheet.create({
   },
   customCancel: {
     marginLeft: 15,
-    marginTop: 5,
   },
 });
 

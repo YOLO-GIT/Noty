@@ -32,8 +32,8 @@ const SearchBar = ({ containerStyle, value, onclear, onChangeText }) => {
 
 const styles = StyleSheet.create({
   searchStyle: {
-    borderWidth: 0.5,
-    borderColor: colors.PRIMARY,
+    borderWidth: 3,
+    borderColor: colors.SECONDARY,
     height: 40,
     borderRadius: 40,
     paddingLeft: 15,
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   container: {
-    marginBottom: 5,
     justifyContent: "center",
   },
   customGradient: {
