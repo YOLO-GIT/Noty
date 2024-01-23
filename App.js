@@ -10,7 +10,8 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import NoteScreen from "./app/screens/NoteScreen";
 import NoteDetail from "./app/components/NoteDetail";
 import NotyProvider from "./app/contexts/NotyProvider";
-import OtherStuff from "./app/components/OtherStuff";
+import MotivateYou from "./app/components/MotivateYou";
+import AboutUs from "./app/components/AboutUs";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -54,8 +55,8 @@ export default function App() {
           }}
         />
         <Drawer.Screen
-          name="Other Screen"
-          component={OtherStuff}
+          name="Motivational Screen"
+          component={SecondNavigator}
           options={{
             drawerLabel: ({ focused }) => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -65,7 +66,7 @@ export default function App() {
                     fontWeight: "bold",
                   }}
                 >
-                  Custom
+                  Motivate
                 </Text>
                 <Text
                   style={{
@@ -73,7 +74,33 @@ export default function App() {
                     fontWeight: focused ? "bold" : null,
                   }}
                 >
-                  OtherStuff Label
+                  Page
+                </Text>
+              </View>
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="About Us"
+          component={AboutUs}
+          options={{
+            drawerLabel: ({ focused }) => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text
+                  style={{
+                    color: focused ? "green" : "black",
+                    fontWeight: "bold",
+                  }}
+                >
+                  About
+                </Text>
+                <Text
+                  style={{
+                    marginLeft: 5,
+                    fontWeight: focused ? "bold" : null,
+                  }}
+                >
+                  Us
                 </Text>
               </View>
             ),
@@ -113,6 +140,16 @@ const MainNavigator = () => {
         <Stack.Screen component={NoteDetail} name="NoteDetail" />
       </Stack.Navigator>
     </NotyProvider>
+  );
+};
+
+const SecondNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{ headerTitle: "", headerTransparent: true }}
+    >
+      <Stack.Screen component={MotivateYou} name="MotivateYou" />
+    </Stack.Navigator>
   );
 };
 
