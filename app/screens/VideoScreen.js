@@ -1,6 +1,8 @@
-import * as React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
+import * as React from "react";
+import { View, StyleSheet, Button } from "react-native";
+import { Video, ResizeMode } from "expo-av";
+import RoundIconbtn from "../components/roundIconbtn";
+import testVideo from "../../assets/test.mp4";
 
 const VideoScreen = () => {
   const video = React.useRef(null);
@@ -11,22 +13,25 @@ const VideoScreen = () => {
       <Video
         ref={video}
         style={styles.video}
-        source={{
-          uri: '../../assets/test.mp4',
-        }}
-        useNativeControls
+        source={testVideo}
+        useNativeControls={false}
         resizeMode={ResizeMode.CONTAIN}
         isLooping
-        onPlaybackStatusUpdate={status => setStatus(() => status)}
+        onPlaybackStatusUpdate={(status) => setStatus(() => status)}
       />
-      <View style={styles.buttons}>
-        <Button
-          title={status.isPlaying ? 'Pause' : 'Play'}
-          onPress={() =>
-            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-          }
-        />
-      </View>
+      {status.isPlaying ? null : (
+        <View>
+          <RoundIconbtn
+            antIconName={status.isPlaying ? "pause" : "play"}
+            title={status.isPlaying ? "Pause" : "Play"}
+            onPress={() =>
+              status.isPlaying
+                ? video.current.pauseAsync()
+                : video.current.playAsync()
+            }
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -41,7 +46,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     position: "absolute",
-    top: 0,
+    bottom: 0,
     left: 0,
   },
 });
