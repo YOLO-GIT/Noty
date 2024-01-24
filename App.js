@@ -11,7 +11,7 @@ import NoteScreen from "./app/screens/NoteScreen";
 import NoteDetail from "./app/components/NoteDetail";
 import NotyProvider from "./app/contexts/NotyProvider";
 import MotivateYou from "./app/components/MotivateYou";
-import AboutUs from "./app/components/AboutUs";
+import VideoScreen from "./app/screens/VideoScreen";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -82,7 +82,7 @@ export default function App() {
         />
         <Drawer.Screen
           name="About Us"
-          component={AboutUs}
+          component={ThirdNavigator}
           options={{
             drawerLabel: ({ focused }) => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -149,6 +149,16 @@ const SecondNavigator = () => {
       screenOptions={{ headerTitle: "", headerTransparent: true }}
     >
       <Stack.Screen component={MotivateYou} name="MotivateYou" />
+    </Stack.Navigator>
+  );
+};
+
+const ThirdNavigator = () =>{
+ return (
+    <Stack.Navigator
+      screenOptions={{ headerTitle: "", headerTransparent: true }}
+    >
+      <Stack.Screen component={VideoScreen} name="VideoScreen" />
     </Stack.Navigator>
   );
 };
