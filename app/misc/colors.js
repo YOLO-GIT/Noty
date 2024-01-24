@@ -9,6 +9,7 @@ export default {
   PLACEHOLDER: "#375176",
   CUSTOM_ONE: ["#000428", "#004e92"],
   CUSTOM_TWO: ["#4CA1AF", "#C4E0E5"],
+  CUSTOM_THREE: ["#E0EAFC", "#CFDEF3"],
   MORNING: "#24FE41",
   AFTERNOON: "#45a247",
   EVENING: "#f12711",
