@@ -20,23 +20,31 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "rgb(251 191 36)",
+    primary: "#fff",
   },
 };
 
 export default function App() {
   return (
     <NavigationContainer theme={MyTheme}>
-      <Drawer.Navigator initialRouteName="Main">
+      <Drawer.Navigator
+        initialRouteName="Main"
+        screenOptions={{
+          drawerStyle: { backgroundColor: colors.NIGHT },
+          headerStyle: { backgroundColor: colors.NIGHT },
+          headerTintColor: { backgroundColor: colors.LIGHT },
+        }}
+      >
         <Drawer.Screen
-          name="Note Screen"
+          name="NoteScren"
+          title="Note Page"
           component={MainNavigator}
           options={{
             drawerLabel: ({ focused }) => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text
                   style={{
-                    color: focused ? "green" : "black",
+                    color: focused ? "green" : "white",
                     fontWeight: "bold",
                   }}
                 >
@@ -44,6 +52,7 @@ export default function App() {
                 </Text>
                 <Text
                   style={{
+                    color: "white",
                     marginLeft: 5,
                     fontWeight: focused ? "bold" : null,
                   }}
@@ -55,14 +64,15 @@ export default function App() {
           }}
         />
         <Drawer.Screen
-          name="Motivational Screen"
+          name="MotivatePage"
+          title="Motivational Page"
           component={SecondNavigator}
           options={{
             drawerLabel: ({ focused }) => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text
                   style={{
-                    color: focused ? "green" : "black",
+                    color: focused ? "green" : "white",
                     fontWeight: "bold",
                   }}
                 >
@@ -70,6 +80,7 @@ export default function App() {
                 </Text>
                 <Text
                   style={{
+                    color: "white",
                     marginLeft: 5,
                     fontWeight: focused ? "bold" : null,
                   }}
@@ -82,13 +93,14 @@ export default function App() {
         />
         <Drawer.Screen
           name="About Us"
+          title="About Us Page"
           component={ThirdNavigator}
           options={{
             drawerLabel: ({ focused }) => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text
                   style={{
-                    color: focused ? "green" : "black",
+                    color: focused ? "green" : "white",
                     fontWeight: "bold",
                   }}
                 >
@@ -96,6 +108,7 @@ export default function App() {
                 </Text>
                 <Text
                   style={{
+                    color: "white",
                     marginLeft: 5,
                     fontWeight: focused ? "bold" : null,
                   }}
@@ -153,8 +166,8 @@ const SecondNavigator = () => {
   );
 };
 
-const ThirdNavigator = () =>{
- return (
+const ThirdNavigator = () => {
+  return (
     <Stack.Navigator
       screenOptions={{ headerTitle: "", headerTransparent: true }}
     >
