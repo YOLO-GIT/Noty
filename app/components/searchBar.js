@@ -33,13 +33,12 @@ const SearchBar = ({ containerStyle, value, onclear, onChangeText }) => {
 const styles = StyleSheet.create({
   searchStyle: {
     borderWidth: 3,
-    borderColor: colors.SECONDARY,
+    borderColor: colors.DARK,
     height: 40,
     borderRadius: 40,
     paddingLeft: 15,
     fontSize: 15,
     fontWeight: "bold",
-    placeholderTextColor: colors.PLACEHOLDER,
     zIndex: 1,
   },
   container: {
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
   },
   customGradient: {
     borderRadius: 40,
-    marginTop: 7,
   },
   clearIcon:{
     position: 'absolute',

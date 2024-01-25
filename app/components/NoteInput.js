@@ -91,7 +91,7 @@ const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
     <>
       <StatusBar hidden />
       <Modal visible={visible} animationType="fade">
-        <LinearGradient colors={colors.CUSTOM_TWO} style={{ flex: 1 }}>
+        <LinearGradient colors={colors.CUSTOM_THREE} style={{ flex: 1 }}>
           <Animated.View style={[styles.container, modalAnimatedStyle]}>
             <TextInput
               value={title}
@@ -109,13 +109,11 @@ const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
             <View style={styles.CustomSubmit}>
               <RoundIconbtn
                 antIconName="check"
-                // size={15}
                 onPress={handleSubmit}
               />
               {title.trim() || desc.trim() ? (
                 <RoundIconbtn
                   antIconName="close"
-                  // size={15}
                   style={styles.customCancel}
                   onPress={closeModal}
                 />
@@ -135,13 +133,13 @@ const NoteInput = ({ visible, onClose, onsubmit, note, isEdit }) => {
 const styles = StyleSheet.create({
   input: {
     borderWidth: 2,
-    borderColor: colors.PRIMARY,
+    borderColor: colors.DARK,
     paddingLeft: 15,
     backgroundColor: "#fff6cf",
   },
   input_two: {
     borderWidth: 2,
-    borderColor: colors.PRIMARY,
+    borderColor: colors.DARK,
     backgroundColor: "#fff6cf",
     paddingLeft: 15,
   },
@@ -155,11 +153,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 25,
     fontWeight: "bold",
-    placeholderTextColor: colors.PLACEHOLDER,
   },
   desc: {
     height: 100,
-    placeholderTextColor: colors.PLACEHOLDER,
     fontSize: 15,
   },
   modalBg: {

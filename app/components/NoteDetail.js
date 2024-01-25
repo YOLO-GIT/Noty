@@ -91,7 +91,7 @@ const NoteDetail = (props) => {
 
   return (
     <>
-      <LinearGradient colors={colors.CUSTOM_TWO} style={{ flex: 1 }}>
+      <LinearGradient colors={colors.CUSTOM_THREE} style={{ flex: 1 }}>
         <ScrollView
           contentContainerStyle={[
             styles.container,
@@ -103,11 +103,11 @@ const NoteDetail = (props) => {
               ? `Viewing now at ${formatDate(note.time)}`
               : `Created at ${formatDate(note.time)}`}
           </Text>
-          <View className="mt-10 rounded-lg bg-yellow-700 border-6">
+          <View className="mt-10 rounded-lg bg-slate-900 border-6">
             <Text style={styles.title} className="text-center border-6">
               {note.title}
             </Text>
-            <Text style={styles.desc} className="p-4 bg-amber-200 rounded-b-lg">
+            <Text style={styles.desc} className="p-4 bg-slate-200 rounded-b-lg">
               {note.desc}
             </Text>
           </View>
@@ -145,15 +145,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     opacity: 0.8,
     color: colors.DARK,
-  },
-  styleTime: {
-    textAlign: "center",
-    fontSize: 12,
-    opacity: 0.5,
-    color: colors.LIGHT,
-    marginLeft: "auto",
-    marginRight: "auto",
-    fontWeight: "bold",
   },
 });
 

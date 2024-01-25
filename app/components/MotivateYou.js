@@ -66,7 +66,7 @@ const MotivateYou = () => {
   };
 
   return (
-    <LinearGradient colors={colors.CUSTOM_ONE} style={{ flex: 1 }}>
+    <LinearGradient colors={colors.CUSTOM_THREE} style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text style={styles.header}>Motivational Page</Text>
         <TouchableOpacity onPress={pickImage}>
@@ -108,12 +108,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontStyle: "italic",
     textAlign: "center",
-    color: colors.LIGHT,
+    color: colors.DARK,
     fontWeight: "bold",
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#4CAF50", // Green button
+    backgroundColor: colors.DARK, // Green button
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
