@@ -25,12 +25,12 @@ const Intro = ({ onFinish }) => {
           onChangeText={handleOnChangeText}
           style={styles.textInput}
         />
-        {name.trim().length > 3 ? (
+        {name.trim().length < 4 || name.trim().length > 9 ? (
           <RoundIconbtn antIconName="rightcircle" onPress={handleSubmit} />
         ) : (
           // Alternative component or JSX for the else case
           <Text style={styles.InputWarning}>
-            Name should be at least 4 characters long.
+            Name should be between 4 and 9 characters long.
           </Text>
         )}
       </View>
@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
   InputWarning: {
     alignSelf: "center",
     color: colors.ERROR,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
     paddingLeft: 25,
     marginBottom: 5,
     opacity: 0.5,
