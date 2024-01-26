@@ -12,6 +12,7 @@ import NoteDetail from "./app/components/NoteDetail";
 import NotyProvider from "./app/contexts/NotyProvider";
 import MotivateYou from "./app/components/MotivateYou";
 import VideoScreen from "./app/screens/VideoScreen";
+import AboutUs from "./app/components/AboutUs";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -32,7 +33,8 @@ export default function App() {
         screenOptions={{
           drawerStyle: { backgroundColor: colors.NIGHT },
           headerStyle: { backgroundColor: colors.NIGHT },
-          headerTintColor: { backgroundColor: colors.LIGHT },
+          headerTitleStyle: {color: colors.LIGHT},
+          headerTintColor: colors.LIGHT,
         }}
       >
         <Drawer.Screen
@@ -141,7 +143,7 @@ const MainNavigator = () => {
     findUser();
   }, []);
 
-  const renderNoteScreen = (props) => <NoteScreen {...props} user={user} />;
+  const RenderNoteScreen = (props) => <NoteScreen {...props} user={user} />;
 
   if (isAppFirstTimeOpen) return <Intro onFinish={findUser} />;
   return (
@@ -149,7 +151,7 @@ const MainNavigator = () => {
       <Stack.Navigator
         screenOptions={{ headerTitle: "", headerTransparent: true }}
       >
-        <Stack.Screen component={renderNoteScreen} name="NoteScreen" />
+        <Stack.Screen component={RenderNoteScreen} name="NoteScreen" />
         <Stack.Screen component={NoteDetail} name="NoteDetail" />
       </Stack.Navigator>
     </NotyProvider>
@@ -171,7 +173,13 @@ const ThirdNavigator = () => {
     <Stack.Navigator
       screenOptions={{ headerTitle: "", headerTransparent: true }}
     >
-      <Stack.Screen component={VideoScreen} name="VideoScreen" />
+      <Stack.Screen
+        name="VideoScreen"
+        // component={({ navigation }) => <VideoScreen navigation={navigation} />}
+      >
+        {({ navigation }) => <VideoScreen navigation={navigation} />}
+      </Stack.Screen>
+      <Stack.Screen component={AboutUs} name="AboutUs" />
     </Stack.Navigator>
   );
 };

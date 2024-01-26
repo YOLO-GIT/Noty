@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 30,
     fontWeight: "bold",
-    color: colors.LIGHT,
+    color: colors.DARK,
     marginBottom: 20,
   },
   image: {

@@ -21,7 +21,7 @@ import NotyNotFound from "../components/NotyNotFound";
 
 const NoteScreen = ({ user, navigation }) => {
   const [greet, setGreet] = useState("Evening");
-  const [time_color, setColor] = useState("");
+  const [time_color, setColor] = useState("red");
   const [modalVisible, setModalVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [resultNotFound, setResultNotFound] = useState(false);
