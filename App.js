@@ -13,6 +13,7 @@ import NotyProvider from "./app/contexts/NotyProvider";
 import MotivateYou from "./app/components/MotivateYou";
 import VideoScreen from "./app/screens/VideoScreen";
 import AboutUs from "./app/components/AboutUs";
+import ToDoList from "./app/components/ToDoList";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -33,7 +34,7 @@ export default function App() {
         screenOptions={{
           drawerStyle: { backgroundColor: colors.NIGHT },
           headerStyle: { backgroundColor: colors.NIGHT },
-          headerTitleStyle: {color: colors.LIGHT},
+          headerTitleStyle: { color: colors.LIGHT },
           headerTintColor: colors.LIGHT,
         }}
       >
@@ -94,9 +95,37 @@ export default function App() {
           }}
         />
         <Drawer.Screen
+          name="ToDoList"
+          title="To Do List Page"
+          component={ThirdNavigator}
+          options={{
+            drawerLabel: ({ focused }) => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text
+                  style={{
+                    color: focused ? "green" : "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Reminding
+                </Text>
+                <Text
+                  style={{
+                    color: "white",
+                    marginLeft: 5,
+                    fontWeight: focused ? "bold" : null,
+                  }}
+                >
+                  You
+                </Text>
+              </View>
+            ),
+          }}
+        />
+        <Drawer.Screen
           name="About Us"
           title="About Us Page"
-          component={ThirdNavigator}
+          component={FourthNavigator}
           options={{
             drawerLabel: ({ focused }) => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -169,6 +198,16 @@ const SecondNavigator = () => {
 };
 
 const ThirdNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{ headerTitle: "", headerTransparent: true }}
+    >
+      <Stack.Screen component={ToDoList} name="ToDoList" />
+    </Stack.Navigator>
+  );
+};
+
+const FourthNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerTitle: "", headerTransparent: true }}
