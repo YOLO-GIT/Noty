@@ -25,12 +25,12 @@ const Intro = ({ onFinish }) => {
           onChangeText={handleOnChangeText}
           style={styles.textInput}
         />
-        {name.trim().length < 4 || name.trim().length > 9 ? (
+        {name.trim().length < 5 || name.trim().length > 9 ? (
           <RoundIconbtn antIconName="rightcircle" onPress={handleSubmit} />
         ) : (
           // Alternative component or JSX for the else case
           <Text style={styles.InputWarning}>
-            Name should be between 4 and 9 characters long.
+            Name should be between 5 and 9 characters long.
           </Text>
         )}
       </View>
