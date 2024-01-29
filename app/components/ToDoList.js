@@ -1,12 +1,19 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
 
 const ToDoList = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>ToDoList</Text>
     </View>
-  )
-}
+  );
+};
 
-export default ToDoList
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    flex: 1,
+  },
+});
+
+export default ToDoList;
