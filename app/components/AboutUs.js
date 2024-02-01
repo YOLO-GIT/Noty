@@ -32,28 +32,28 @@ const AboutUs = () => {
           and organize your notes, whether it's for work, school, or personal
           use.
         </Text>
-        <Text style={styles.description}>Connect with us on social media:</Text>
-        <View style={styles.socialLinks}>
-          <TouchableOpacity
-            onPress={() => openSocialMedia("https://github.com/YOLO-GIT")}
-          >
-            <Image source={githubLogo} style={styles.socialLogo} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              openSocialMedia("https://twitter.com/YOLO_LV9999999")
-            }
-          >
-            <Image source={twitterLogo} style={styles.socialLogo} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              openSocialMedia("https://www.tiktok.com/@glacierzpole")
-            }
-          >
-            <Image source={tiktokLogo} style={styles.socialLogo} />
-          </TouchableOpacity>
-        </View>
+        <Text style={styles.description}>Connect with us on social media :D</Text>
+      </View>
+      <View style={styles.footer}>
+        <TouchableOpacity
+          onPress={() => openSocialMedia("https://github.com/YOLO-GIT")}
+        >
+          <Image source={githubLogo} style={styles.socialLogo} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            openSocialMedia("https://twitter.com/YOLO_LV9999999")
+          }
+        >
+          <Image source={twitterLogo} style={styles.socialLogo} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            openSocialMedia("https://www.tiktok.com/@glacierzpole")
+          }
+        >
+          <Image source={tiktokLogo} style={styles.socialLogo} />
+        </TouchableOpacity>
       </View>
     </LinearGradient>
   );
@@ -77,10 +77,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 15,
   },
-  socialLinks: {
+  footer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: "#fff", // Footer background color
+    borderTopWidth: 1,
+    borderTopColor: "#ddd", // Border color
   },
   socialLogo: {
     width: 40,
