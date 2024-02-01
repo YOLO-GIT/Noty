@@ -202,7 +202,7 @@ const ThirdNavigator = () => {
     <Stack.Navigator
       screenOptions={{ headerTitle: "", headerTransparent: true }}
     >
-      <Stack.Screen component={ToDoList} name="ToDoList" />
+      <Stack.Screen component={ToDoList} name="TodoList" />
     </Stack.Navigator>
   );
 };
